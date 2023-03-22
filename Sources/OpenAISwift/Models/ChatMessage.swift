@@ -13,11 +13,21 @@ public enum ChatRole: String, Codable {
 
 public struct ChatMessage: Codable {
     public let role: ChatRole
-    public let content: String
+    public let content: String?
+    public let cd_key: String?
+    public let cd_variables: [String:String]?
     
-    public init(role: ChatRole, content: String) {
+    /// public initialiser for ChatMessage
+    /// Note - the content value is still available for responses - though you cannot initialise it directly
+    /// - Parameters:
+    ///   - role: user role
+    ///   - cd_key: key for message in ChatDefender
+    ///   - cd_variables: optional variables for substitution
+    public init(role: ChatRole, cd_key: String,cd_variables:[String:String]? = nil) {
         self.role = role
-        self.content = content
+        self.content = nil
+        self.cd_key = cd_key
+        self.cd_variables = cd_variables
     }
 }
 
