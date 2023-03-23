@@ -23,22 +23,23 @@ public struct ChatMessage: Codable {
     public let role: ChatRole
     /// The content of the message. This only used for messages returned by the API
     public let content: String?
-    /// The key referencing your message in Chat Defender
-    public let cd_key: String?
-    /// The variables for substitution into your message
-    public let cd_variables: [String:String]?
     
+    public let cdContent: CDMessage?
     
     /// Creates a new chat message with a given role and content.
     /// - Parameters:
     ///   - role: The role of the sender of the message.
-    ///   - cd_key: key for message in ChatDefender
-    ///   - cd_variables: optional variables for substitution
-    public init(role: ChatRole, cd_key: String,cd_variables:[String:String]? = nil) {
+    ///   - cdContent: values for your ChatDefender message
+    public init(role: ChatRole, cdContent: CDMessage) {
         self.role = role
         self.content = nil
-        self.cd_key = cd_key
-        self.cd_variables = cd_variables
+        self.cdContent = cdContent
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case role
+        case content
+        case cdContent = "cd_content"
     }
 }
 
