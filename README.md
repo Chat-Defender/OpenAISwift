@@ -41,8 +41,9 @@ do {
             //'substitute_joke' is the key for a message with the prompt "Limit Prose: Please tell me a joke about ##subject##!"
             //'subject' is the subject for your new joke
             ChatMessage(role: .user,
-                        cd_key: "substitute_joke", 
-                        cd_variables: ["subject" : subject]) 
+                        cdContent: CDMessage(key: "substitute_joke",
+                                             variables: ["subject" : subject])
+                       )
     ]
                 
     let result = try await openAI.sendChat(with: chat)
