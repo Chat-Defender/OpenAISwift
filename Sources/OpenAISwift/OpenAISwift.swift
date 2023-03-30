@@ -18,11 +18,13 @@ public class OpenAISwift {
         
         /// Initialiser
         /// - Parameter session: the session to use for network requests.
-        public init(session: URLSession = URLSession.shared) {
+        public init(session: URLSession = URLSession.shared, userID:String? = nil) {
             self.session = session
+            self.userID = userID
         }
 
         let session:URLSession
+        let userID:String?
     }
     
     public init(authToken: String, config: Config = Config()) {
@@ -200,6 +202,10 @@ extension OpenAISwift {
         
         if let token = self.token {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        if let userID = config.userID {
+            request.setValue(userID, forHTTPHeaderField: "CD-userid")
         }
         
         request.setValue("application/json", forHTTPHeaderField: "content-type")
