@@ -33,10 +33,12 @@ You can then use the slightly modified API below
 
 ### [Chat](https://platform.openai.com/docs/api-reference/chat)
 
-Get responses to chat conversations through ChatGPT (aka GPT-3.5) and GPT-4 (in beta).
+Get responses to chat conversations through ChatGPT (aka GPT-3.5) and GPT-4.
 
 ```swift
 do {
+    let openAI = OpenAISwift(authToken: "CHAT_DEFENDER_TOKEN")
+
     let chat: [ChatMessage] = [
             //'substitute_joke' is the key for a message with the prompt "Limit Prose: Please tell me a joke about ##subject##!"
             //'subject' is the subject for your new joke
